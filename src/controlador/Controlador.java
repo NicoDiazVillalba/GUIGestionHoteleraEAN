@@ -1,6 +1,5 @@
 package controlador;
 
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.AlmuerzoYRefrigerio;
@@ -12,8 +11,9 @@ import modelo.HabitacionDuplex;
 import modelo.HabitacionJunior;
 import modelo.HabitacionSencilla;
 import modelo.ListaClientes;
-import modelo.Persona;
+import modelo.ListaReserva;
 import modelo.Piscina;
+import modelo.Reserva;
 import modelo.Spa;
 import modelo.TresComidas;
 import vista.vistaPrincipal;
@@ -22,6 +22,7 @@ public class Controlador {
 
     private vistaPrincipal mivista;
     private ListaClientes miLista = new ListaClientes();
+    private ListaReserva miListaReserva = new ListaReserva();
 
     public Controlador(vistaPrincipal objetoGUI) {
         this.mivista = objetoGUI;
@@ -32,12 +33,6 @@ public class Controlador {
 
     //Metodo donde escucha el boton
     private void accionarBotones() {
-        this.mivista.getBotonIngresardatos().addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                extraerdatosboton(evt);
-            }
-
-        });
 
         this.mivista.getBotoningresarDatosAcompañantes().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +86,14 @@ public class Controlador {
             }
 
         });
+
+        this.mivista.getBotonHacerReserva().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hacerReserva(evt);
+
+            }
+
+        });
     }
 
     //Medodo donde se realiza la accion luego de oprimir el boton
@@ -102,24 +105,6 @@ public class Controlador {
         String correo = this.mivista.getEntradaCorreo().getText();
         double celular = Double.parseDouble(this.mivista.getEntradaCelular().getText());
         String direccion = this.mivista.getEntradaDireccion().getText();
-
-        //Instanciar el objeto persona
-        Cliente objetoCliente = new Cliente(nombre, apellido, cedula, correo, celular, direccion);
-        //Agregar el objeto a una lista
-        this.miLista.agregarCliente(objetoCliente);
-        //Mostrar datos 
-
-        DefaultTableModel mapeo = (DefaultTableModel) this.mivista.getTablaReserva().getModel();
-
-        limpiarTabla(mapeo);
-
-        for (Cliente elemento : this.miLista.mostrarLista()) {
-            mapeo.addRow(new Object[]{elemento.getNombre(), elemento.getApellido(), elemento.getCedula(), elemento.getCelular()});
-            System.out.println(elemento.getNombre());
-        }
-
-        limpiarFormulario();
-        JOptionPane.showMessageDialog(mivista, "Datos registrados Correctamente!");
 
     }
 
@@ -186,6 +171,7 @@ public class Controlador {
 
             int valorTotalAcompañantes = noches * 60000;
             this.mivista.getLabelCostoTotalNoches().setText(Integer.toString(valorTotalAcompañantes));
+            JOptionPane.showMessageDialog(mivista, "Noches registradas correctamente!");
         }
 
     }
@@ -321,7 +307,7 @@ public class Controlador {
         }
 
         int totalServiciosAdicionales = costoGimansio + costoSpa + costoPiscina;
-        System.out.println("total" + totalServiciosAdicionales);
+        this.mivista.getLabelCostoTotalAdicionales().setText(Integer.toString(totalServiciosAdicionales));
 
     }
 
@@ -354,6 +340,37 @@ public class Controlador {
         }
         return costoPisicina;
     }*/
+    private void hacerReserva(java.awt.event.ActionEvent evt) {
+
+        String nombre = this.mivista.getEntradaNombre().getText();
+        String apellido = this.mivista.getEntradaApellido().getText();
+        int cedula = Integer.parseInt(this.mivista.getEntradaCedula().getText());
+        int acompañantes = Integer.parseInt(this.mivista.getLabelTotalAcompañantes().getText());
+        int noches = Integer.parseInt(this.mivista.getLabelNumeroNoches().getText());
+        String habitacion = this.mivista.getComboboxHabitacion().getSelectedItem().toString();
+        String comida = this.mivista.getComboBoxComida().getSelectedItem().toString();
+
+        int costoAcompañantes = Integer.parseInt(this.mivista.getLabelvalorTotalAcompañantes().getText());
+        int costoHabitacion = Integer.parseInt(this.mivista.getLabelCostoHabitacion().getText());
+        int costoComida = Integer.parseInt(this.mivista.getLabelCostoComida().getText());
+        int costoNoches = Integer.parseInt(this.mivista.getLabelCostoTotalNoches().getText());
+        int costoAdicionales = Integer.parseInt(this.mivista.getLabelCostoTotalAdicionales().getText());
+
+        Reserva objetoReserva = new Reserva(nombre, apellido, cedula, acompañantes, noches, habitacion, comida);
+        objetoReserva.definirCosto(costoAcompañantes, costoHabitacion, costoComida, costoNoches, costoAdicionales);
+
+        this.miListaReserva.agregarReserva(objetoReserva);
+        DefaultTableModel mapeo2 = (DefaultTableModel) this.mivista.getTablaReserva().getModel();
+
+        limpiarTabla(mapeo2);
+
+        for (Reserva elemento : this.miListaReserva.getLista()) {
+            mapeo2.addRow(new Object[]{elemento.getNombre(), elemento.getApellido(), elemento.getCedula(), elemento.getAcompañantes(), elemento.getNoches(), elemento.getHabitacion(), elemento.getComida(), elemento.getCostoTotal()});
+            System.out.println(elemento.getNombre());
+        }
+        limpiarFormulario();
+        JOptionPane.showMessageDialog(mivista, "Datos registrados Correctamente!");
+    }
 
     private void limpiarFormulario() {
         this.mivista.getEntradaNombre().setText("");
@@ -362,5 +379,32 @@ public class Controlador {
         this.mivista.getEntradaCorreo().setText("");
         this.mivista.getEntradaCelular().setText("");
         this.mivista.getEntradaDireccion().setText("");
+        this.mivista.getEntradaNumNiños().setText("");
+        this.mivista.getEntradaNnumAdultos().setText("");
+        this.mivista.getLabelvalorNiños().setText("");
+        this.mivista.getLabelvalorAdultos().setText("");
+        this.mivista.getLabelvalorTotalAcompañantes().setText("");
+        this.mivista.getLabelTotalAcompañantes().setText("");
+        this.mivista.getLabelCostoTotalAdicionales().setText("");
+        this.mivista.getEntradaFechaLlegada().setText("");
+        this.mivista.getEntradaFechaSalida().setText("");
+        this.mivista.getLabelNumeroNoches().setText("");
+        this.mivista.getLabelCostoTotalNoches().setText("");
+        this.mivista.getComboBoxComida().setSelectedItem(("Selecciona"));
+        this.mivista.getLabelAcompañantesComida().setText("");
+        this.mivista.getLabelNochesComida().setText("");
+        this.mivista.getLabelCostoComida().setText("");
+        this.mivista.getLabelHabitacionCamas().setText(Integer.toString(0));
+        this.mivista.getLabelHabitacionCapacidad().setText(Integer.toString(0));
+        this.mivista.getLabelHabitacionTelevisores().setText(Integer.toString(0));
+        this.mivista.getLabelHabitacionBalcon().setText(Integer.toString(0));
+        this.mivista.getLabelCostoHabitacion().setText(Integer.toString(0));
+        this.mivista.getComboboxHabitacion().setSelectedItem("Selecciona");
+        this.mivista.getCheckboxGimnasio().setSelected(false);
+        this.mivista.getCheckboxSpa().setSelected(false);
+        this.mivista.getCheckboxPiscina().setSelected(false);
+        this.mivista.getCheckboxNinguno().setSelected(false);
+        this.mivista.getLabelCostoTotalAdicionales().setText("");
+
     }
 }
