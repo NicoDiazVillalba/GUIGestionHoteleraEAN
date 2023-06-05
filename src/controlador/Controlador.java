@@ -7,14 +7,11 @@ import modelo.AlmuerzoYRefrigerio;
 import modelo.Cliente;
 import modelo.Desayuno;
 import modelo.DesayunoYRefrigerio;
-import modelo.Gimnasio;
 import modelo.HabitacionDuplex;
 import modelo.HabitacionJunior;
 import modelo.HabitacionSencilla;
 import modelo.ListaClientes;
 import modelo.Persona;
-import modelo.Piscina;
-import modelo.Spa;
 import modelo.TresComidas;
 import vista.vistaPrincipal;
 
@@ -79,14 +76,6 @@ public class Controlador {
         this.mivista.getBotonConsultarComida().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultarComida(evt);
-
-            }
-
-        });
-
-        this.mivista.getBotonElegirServiciosAdicionales().addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                elegirServicioAdicional(evt);
 
             }
 
@@ -208,8 +197,8 @@ public class Controlador {
 
     private void consultarHabitacion(java.awt.event.ActionEvent evt) {
 
-        HabitacionDuplex habitacionD = new HabitacionDuplex("Duplex", 4, 8, 4, 1200000, true);
-        HabitacionJunior habitacionJ = new HabitacionJunior("Junior", 2, 4, 2, 800000, false);
+        HabitacionDuplex habitacionD = new HabitacionDuplex("Duplex", 4, 2, 4, 1200000, true);
+        HabitacionJunior habitacionJ = new HabitacionJunior("Junior", 2, 1, 2, 800000, false);
         HabitacionSencilla habitacionS = new HabitacionSencilla("Sencilla", 1, 1, 0, 500000, false);
         String seleccion = this.mivista.getComboboxHabitacion().getSelectedItem().toString();
 
@@ -243,18 +232,21 @@ public class Controlador {
             this.mivista.getLabelCostoHabitacion().setText(Integer.toString(0));
         }
     }
-
-    private void elegirComida(java.awt.event.ActionEvent evt) {
+    
+    private void elegirComida(java.awt.event.ActionEvent evt){
         int numeroNochesComida = Integer.parseInt(this.mivista.getLabelNochesComida().getText());
         int numeroAcompañantesComida = Integer.parseInt(this.mivista.getLabelAcompañantesComida().getText());
         int costoTotal = Integer.parseInt(this.mivista.getLabelCostoComida().getText());
-
-        if (numeroNochesComida == 0 || numeroAcompañantesComida == 0 || costoTotal == 0) {
+        
+        if (numeroNochesComida ==0||numeroAcompañantesComida==0||costoTotal==0){
             JOptionPane.showMessageDialog(mivista, "Por favor, selecciona una opción!");
-        } else {
+        }else{
             JOptionPane.showMessageDialog(mivista, "Comida seleccionada correctamente!");
         }
-
+        
+        System.out.println("niches"+numeroNochesComida);
+        System.out.println("personas: "+numeroAcompañantesComida);    
+        System.out.println("Costo"+costoTotal);
     }
 
     private void consultarComida(java.awt.event.ActionEvent evt) {
@@ -265,7 +257,7 @@ public class Controlador {
         TresComidas comida4 = new TresComidas("Desayuno Almuerzo y Cena");
         //COmbo box y variables
         String seleccion = this.mivista.getComboBoxComida().getSelectedItem().toString();
-        int costoTotalComida = 0;
+        int costoTotalComida;
 
         int numeroNoches = Integer.parseInt(this.mivista.getLabelNumeroNoches().getText());
         int numeroAdultos = Integer.parseInt(this.mivista.getEntradaNnumAdultos().getText());
@@ -275,16 +267,16 @@ public class Controlador {
         this.mivista.getLabelAcompañantesComida().setText((this.mivista.getLabelTotalAcompañantes().getText()));
         if (seleccion == "Desayuno - $15.000") {
             costoTotalComida = comida1.definirCosto(numeroNiños, numeroAdultos, numeroNoches);
-
+            this.mivista.getLabelCostoComida().setText(Integer.toString(costoTotalComida));
         } else if (seleccion == "Desayuno y Refrigerio - $20.000") {
             costoTotalComida = comida2.definirCosto(numeroNiños, numeroAdultos, numeroNoches);
-
+            this.mivista.getLabelCostoComida().setText(Integer.toString(costoTotalComida));
         } else if (seleccion == "Almuerzo y Refrigerio - $35.000") {
             costoTotalComida = comida3.definirCosto(numeroNiños, numeroAdultos, numeroNoches);
-
+            this.mivista.getLabelCostoComida().setText(Integer.toString(costoTotalComida));
         } else if (seleccion == "Desayuno, Almuerzo y Cena - $50.000") {
             costoTotalComida = comida4.definirCosto(numeroNiños, numeroAdultos, numeroNoches);
-
+            this.mivista.getLabelCostoComida().setText(Integer.toString(costoTotalComida));
         } else {
             JOptionPane.showMessageDialog(mivista, "Por favor, selecciona una opción!");
             this.mivista.getLabelAcompañantesComida().setText(Integer.toString(0));
@@ -292,68 +284,7 @@ public class Controlador {
             this.mivista.getLabelCostoComida().setText(Integer.toString(0));
         }
 
-        this.mivista.getLabelCostoComida().setText(Integer.toString(costoTotalComida));
     }
-
-    private void elegirServicioAdicional(java.awt.event.ActionEvent evt) {
-
-        int costoGimansio = 0, costoSpa = 0, costoPiscina = 0;
-
-        Gimnasio gimnasio = new Gimnasio(240000);
-        Spa spa = new Spa(310000);
-        Piscina piscina = new Piscina(65000);
-
-        if ((this.mivista.getCheckboxNinguno().isSelected() && this.mivista.getCheckboxGimnasio().isSelected())
-                || (this.mivista.getCheckboxNinguno().isSelected() && this.mivista.getCheckboxSpa().isSelected())
-                || (this.mivista.getCheckboxNinguno().isSelected() && this.mivista.getCheckboxPiscina().isSelected())) {
-            this.mivista.getCheckboxGimnasio().setSelected(false);
-            this.mivista.getCheckboxSpa().setSelected(false);
-            this.mivista.getCheckboxPiscina().setSelected(false);
-            this.mivista.getCheckboxNinguno().setSelected(false);
-
-            JOptionPane.showMessageDialog(mivista, "Error, selecciona una opcion correcta");
-
-        } else {
-            costoGimansio = gimnasio.seleccionarServicio(this.mivista);
-            costoSpa = spa.seleccionarServicio(this.mivista);
-            costoPiscina = piscina.seleccionarServicio(this.mivista);
-            JOptionPane.showMessageDialog(mivista, "Seleccionado con exito");
-        }
-
-        int totalServiciosAdicionales = costoGimansio + costoSpa + costoPiscina;
-        System.out.println("total" + totalServiciosAdicionales);
-
-    }
-
-    /*private int gimansioSeleccionado(vistaPrincipal vista, Gimnasio objetoGimansio) {
-        int costoGimansio;
-        if (vista.getCheckboxGimnasio().isSelected()) {
-            costoGimansio = objetoGimansio.getCosto();
-        } else {
-            costoGimansio = 0;
-        }
-        return costoGimansio;
-    }
-
-    private int spaSeleccionado(vistaPrincipal vista, Spa objetoSpa) {
-        int costoSpa;
-        if (vista.getCheckboxSpa().isSelected()) {
-            costoSpa = objetoSpa.getCosto();
-        } else {
-            costoSpa = 0;
-        }
-        return costoSpa;
-    }
-
-    private int piscinaSeleccionado(vistaPrincipal vista, Piscina objetoPiscina) {
-        int costoPisicina;
-        if (vista.getCheckboxPiscina().isSelected()) {
-            costoPisicina = objetoPiscina.getCosto();
-        } else {
-            costoPisicina = 0;
-        }
-        return costoPisicina;
-    }*/
 
     private void limpiarFormulario() {
         this.mivista.getEntradaNombre().setText("");

@@ -5,7 +5,6 @@
 package vista;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -112,13 +111,6 @@ public class vistaPrincipal extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         labelCostoComida = new javax.swing.JLabel();
         botonIngresarComida = new javax.swing.JButton();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel37 = new javax.swing.JLabel();
-        checkboxGimnasio = new javax.swing.JCheckBox();
-        checkboxPiscina = new javax.swing.JCheckBox();
-        checkboxSpa = new javax.swing.JCheckBox();
-        checkboxNinguno = new javax.swing.JCheckBox();
-        botonElegirServiciosAdicionales = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -347,7 +339,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(botoningresarDatosAcompañantes)
-                        .addGap(0, 43, Short.MAX_VALUE))
+                        .addGap(0, 40, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel15)
@@ -647,7 +639,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel39)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelCostoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelCostoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botonIngresarComida)
                         .addContainerGap())))
@@ -662,6 +654,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
                     .addComponent(botonConsultarComida))
                 .addGap(8, 8, 8)
                 .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -680,80 +673,6 @@ public class vistaPrincipal extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botonIngresarComida)))
                 .addContainerGap())
-        );
-
-        jPanel7.setBackground(new java.awt.Color(255, 102, 102));
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Servicios Adicionales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
-
-        jLabel37.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel37.setText("<html>Selecciona algún servicio adicional que quieras adquirir. Si no es el caso, selecciona la casilla ''Ninguno'' y confirma<html>");
-
-        checkboxGimnasio.setBackground(new java.awt.Color(252, 102, 102));
-        checkboxGimnasio.setText("Gimnasio - $240.000");
-        checkboxGimnasio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkboxGimnasioActionPerformed(evt);
-            }
-        });
-
-        checkboxPiscina.setBackground(new java.awt.Color(252, 102, 102));
-        checkboxPiscina.setText("Piscina - $65.000");
-
-        checkboxSpa.setBackground(new java.awt.Color(252, 102, 102));
-        checkboxSpa.setText("Spa - $310.000");
-        checkboxSpa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkboxSpaActionPerformed(evt);
-            }
-        });
-
-        checkboxNinguno.setBackground(new java.awt.Color(252, 102, 102));
-        checkboxNinguno.setText("Ninguno");
-        checkboxNinguno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkboxNingunoActionPerformed(evt);
-            }
-        });
-
-        botonElegirServiciosAdicionales.setText("Seleccionar");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(checkboxNinguno, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonElegirServiciosAdicionales))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(checkboxSpa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(checkboxPiscina, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(checkboxGimnasio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(checkboxGimnasio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(checkboxPiscina)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(checkboxSpa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(checkboxNinguno)
-                    .addComponent(botonElegirServiciosAdicionales))
-                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -775,9 +694,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -787,15 +704,15 @@ public class vistaPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(74, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(1393, Short.MAX_VALUE))
         );
 
         pack();
@@ -812,18 +729,6 @@ public class vistaPrincipal extends javax.swing.JFrame {
     private void botonConsultarHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultarHabitacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonConsultarHabitacionActionPerformed
-
-    private void checkboxGimnasioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxGimnasioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkboxGimnasioActionPerformed
-
-    private void checkboxSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxSpaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkboxSpaActionPerformed
-
-    private void checkboxNingunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxNingunoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkboxNingunoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -964,27 +869,10 @@ public class vistaPrincipal extends javax.swing.JFrame {
     public JLabel getLabelNochesComida() {
         return labelNochesComida;
     }
-
-    public JCheckBox getCheckboxGimnasio() {
-        return checkboxGimnasio;
-    }
-
-    public JCheckBox getCheckboxNinguno() {
-        return checkboxNinguno;
-    }
-
-    public JCheckBox getCheckboxPiscina() {
-        return checkboxPiscina;
-    }
-
-    public JCheckBox getCheckboxSpa() {
-        return checkboxSpa;
-    }
-
-    public JButton getBotonElegirServiciosAdicionales() {
-        return botonElegirServiciosAdicionales;
-    }
     
+    
+    
+
     /**
      * @param args the command line arguments
      */
@@ -997,15 +885,10 @@ public class vistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonConsultarComida;
     private javax.swing.JButton botonConsultarHabitacion;
     private javax.swing.JButton botonElegirHabitacion;
-    private javax.swing.JButton botonElegirServiciosAdicionales;
     private javax.swing.JButton botonIngresarComida;
     private javax.swing.JButton botonIngresarEstadia;
     private javax.swing.JButton botonIngresardatos;
     private javax.swing.JButton botoningresarDatosAcompañantes;
-    private javax.swing.JCheckBox checkboxGimnasio;
-    private javax.swing.JCheckBox checkboxNinguno;
-    private javax.swing.JCheckBox checkboxPiscina;
-    private javax.swing.JCheckBox checkboxSpa;
     private javax.swing.JComboBox<String> comboBoxComida;
     private javax.swing.JComboBox<String> comboboxHabitacion;
     private javax.swing.JTextField entradaApellido;
@@ -1048,7 +931,6 @@ public class vistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1062,7 +944,6 @@ public class vistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelAcompañantesComida;
     private javax.swing.JLabel labelCostoComida;
