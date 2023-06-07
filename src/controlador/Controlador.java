@@ -34,6 +34,13 @@ public class Controlador {
     //Metodo donde escucha el boton
     private void accionarBotones() {
 
+        this.mivista.getBotonGuardarDatosPersonales().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarDatosPersonales(evt);
+            }
+
+        });
+
         this.mivista.getBotoningresarDatosAcompañantes().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 extraerdatosbotonacompañantes(evt);
@@ -97,7 +104,7 @@ public class Controlador {
     }
 
     //Medodo donde se realiza la accion luego de oprimir el boton
-    private void extraerdatosboton(java.awt.event.ActionEvent evt) {
+    private void guardarDatosPersonales(java.awt.event.ActionEvent evt) {
         //Crear y extraer la infromacion del formulario 
         String nombre = this.mivista.getEntradaNombre().getText();
         String apellido = this.mivista.getEntradaApellido().getText();
@@ -105,6 +112,15 @@ public class Controlador {
         String correo = this.mivista.getEntradaCorreo().getText();
         double celular = Double.parseDouble(this.mivista.getEntradaCelular().getText());
         String direccion = this.mivista.getEntradaDireccion().getText();
+
+        JOptionPane.showMessageDialog(mivista, "Se guardaron los datos Correctamente!!");
+
+        this.mivista.getEntradaNombre().setEditable(false);
+        this.mivista.getEntradaApellido().setEditable(false);
+        this.mivista.getEntradaCedula().setEditable(false);
+        this.mivista.getEntradaCorreo().setEditable(false);
+        this.mivista.getEntradaCelular().setEditable(false);
+        this.mivista.getEntradaDireccion().setEditable(false);
 
     }
 
@@ -370,6 +386,13 @@ public class Controlador {
         }
         limpiarFormulario();
         JOptionPane.showMessageDialog(mivista, "Datos registrados Correctamente!");
+
+        this.mivista.getEntradaNombre().setEditable(true);
+        this.mivista.getEntradaApellido().setEditable(true);
+        this.mivista.getEntradaCedula().setEditable(true);
+        this.mivista.getEntradaCorreo().setEditable(true);
+        this.mivista.getEntradaCelular().setEditable(true);
+        this.mivista.getEntradaDireccion().setEditable(true);
     }
 
     private void limpiarFormulario() {
