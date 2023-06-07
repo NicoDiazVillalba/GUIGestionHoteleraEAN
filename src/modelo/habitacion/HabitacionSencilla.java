@@ -1,5 +1,5 @@
 
-package modelo;
+package modelo.habitacion;
 
 
 public class HabitacionSencilla extends HabitacionDuplex{

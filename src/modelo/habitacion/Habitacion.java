@@ -1,5 +1,5 @@
 
-package modelo;
+package modelo.habitacion;
 
 import javax.swing.JOptionPane;
 

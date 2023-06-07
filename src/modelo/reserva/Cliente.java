@@ -1,5 +1,5 @@
 
-package modelo;
+package modelo.reserva;
 
 import javax.swing.JOptionPane;
 

@@ -1,5 +1,5 @@
 
-package modelo;
+package modelo.comidas;
 
 
 public class AlmuerzoYRefrigerio extends Comidas{

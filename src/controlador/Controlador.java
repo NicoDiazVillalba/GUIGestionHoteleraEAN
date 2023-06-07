@@ -2,30 +2,47 @@ package controlador;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.AlmuerzoYRefrigerio;
-import modelo.Cliente;
-import modelo.Desayuno;
-import modelo.DesayunoYRefrigerio;
-import modelo.Gimnasio;
-import modelo.HabitacionDuplex;
-import modelo.HabitacionJunior;
-import modelo.HabitacionSencilla;
-import modelo.ListaClientes;
-import modelo.ListaReserva;
-import modelo.Piscina;
-import modelo.Reserva;
-import modelo.Spa;
-import modelo.TresComidas;
+import modelo.comidas.AlmuerzoYRefrigerio;
+import modelo.comidas.Desayuno;
+import modelo.comidas.DesayunoYRefrigerio;
+import modelo.serviciosAdicionales.Gimnasio;
+import modelo.habitacion.HabitacionDuplex;
+import modelo.habitacion.HabitacionJunior;
+import modelo.habitacion.HabitacionSencilla;
+import modelo.reserva.ListaClientes;
+import modelo.reserva.ListaReserva;
+import modelo.serviciosAdicionales.Piscina;
+import modelo.reserva.Reserva;
+import modelo.serviciosAdicionales.Spa;
+import modelo.comidas.TresComidas;
 import vista.vistaPrincipal;
+import vista.vistaRegistroAcompañantes;
+import vista.vistaRegistroComidas;
+import vista.vistaRegistroEstadia;
+import vista.vistaRegistroHabitacion;
+import vista.vistaRegistroInicial;
+import vista.vistaRegistroServiciosAdicionales;
 
 public class Controlador {
 
     private vistaPrincipal mivista;
+    private vistaRegistroInicial vistaRegistroInicial;
+    private vistaRegistroAcompañantes vistaRegistroAcompañantes;
+    private vistaRegistroEstadia vistaRegistroEstadia;
+    private vistaRegistroHabitacion vistaRegistroHabitacion;
+    private vistaRegistroComidas vistaRegistroComidas;
+    private vistaRegistroServiciosAdicionales vistaRegistroServiciosAdicionales;
     private ListaClientes miLista = new ListaClientes();
     private ListaReserva miListaReserva = new ListaReserva();
 
-    public Controlador(vistaPrincipal objetoGUI) {
+    public Controlador(vistaPrincipal objetoGUI, vistaRegistroInicial objetoGUIRegistroInicial, vistaRegistroAcompañantes objetoGuiAcompañantes, vistaRegistroEstadia objetoGUIRegistroEstadia, vistaRegistroHabitacion objetoGUIRegistroHabitacion,vistaRegistroComidas objetoGUIRegistroComidas,vistaRegistroServiciosAdicionales objetoGUIRegistroServiciosAdicionales) {
         this.mivista = objetoGUI;
+        this.vistaRegistroInicial = objetoGUIRegistroInicial;
+        this.vistaRegistroAcompañantes = objetoGuiAcompañantes;
+        this.vistaRegistroEstadia = objetoGUIRegistroEstadia;
+        this.vistaRegistroHabitacion = objetoGUIRegistroHabitacion;
+        this.vistaRegistroComidas = objetoGUIRegistroComidas;
+        this.vistaRegistroServiciosAdicionales = objetoGUIRegistroServiciosAdicionales;
         this.mivista.setVisible(true);
         accionarBotones();
 
@@ -34,28 +51,56 @@ public class Controlador {
     //Metodo donde escucha el boton
     private void accionarBotones() {
 
-        this.mivista.getBotonGuardarDatosPersonales().addActionListener(new java.awt.event.ActionListener() {
+        this.mivista.getBotonVistaDatosPersonales().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hacerVisibleVistaRegistroInicial(evt);
+            }
+
+        });
+
+        this.vistaRegistroInicial.getBotonGuardarDatosPersonales().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarDatosPersonales(evt);
             }
 
         });
 
-        this.mivista.getBotoningresarDatosAcompañantes().addActionListener(new java.awt.event.ActionListener() {
+        this.mivista.getBotonVistaRegistroAcompañantes().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hacerVisibleVistaRegistroAcompañantes(evt);
+            }
+
+        });
+
+        this.vistaRegistroAcompañantes.getBotoningresarDatosAcompañantes().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 extraerdatosbotonacompañantes(evt);
             }
 
         });
 
-        this.mivista.getBotonIngresarEstadia().addActionListener(new java.awt.event.ActionListener() {
+        this.mivista.getBotonVistaRegistroEstadia().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hacerVisibleVistaRegistroEstadia(evt);
+            }
+
+        });
+        
+        this.mivista.getBotonVistaRegistroHabitacion().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hacerVisibleRegistroHabitacion(evt);
+            }
+
+        });
+
+        this.vistaRegistroEstadia.getBotonIngresarEstadia().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 extrarDatosBotonEstadia(evt);
             }
 
         });
 
-        this.mivista.getBotonElegirHabitacion().addActionListener(new java.awt.event.ActionListener() {
+        this.vistaRegistroHabitacion.getBotonElegirHabitacion().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 extraerDatosBotonHabitacion(evt);
 
@@ -63,14 +108,21 @@ public class Controlador {
 
         });
 
-        this.mivista.getBotonConsultarHabitacion().addActionListener(new java.awt.event.ActionListener() {
+        this.vistaRegistroHabitacion.getBotonConsultarHabitacion().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
                 consultarHabitacion(evt);
             }
         });
 
-        this.mivista.getBotonIngresarComida().addActionListener(new java.awt.event.ActionListener() {
+        this.mivista.getBotonVistaRegistroComidas().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+                hacerVisibleRegistroComidas(evt);
+            }
+        });
+        
+        this.vistaRegistroComidas.getBotonIngresarComida().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 elegirComida(evt);
 
@@ -78,15 +130,23 @@ public class Controlador {
 
         });
 
-        this.mivista.getBotonConsultarComida().addActionListener(new java.awt.event.ActionListener() {
+        this.vistaRegistroComidas.getBotonConsultarComida().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultarComida(evt);
 
             }
 
         });
+        
+        this.mivista.getBotonVistaServiciosAdicionales().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hacerVisibleServiciosAdicionales(evt);
 
-        this.mivista.getBotonElegirServiciosAdicionales().addActionListener(new java.awt.event.ActionListener() {
+            }
+
+        });
+
+        this.vistaRegistroServiciosAdicionales.getBotonElegirServiciosAdicionales().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 elegirServicioAdicional(evt);
 
@@ -103,25 +163,51 @@ public class Controlador {
         });
     }
 
-    //Medodo donde se realiza la accion luego de oprimir el boton
+    private void hacerVisibleVistaRegistroInicial(java.awt.event.ActionEvent evt) {
+        this.vistaRegistroInicial.setVisible(true);
+    }
+
+    private void hacerVisibleVistaRegistroAcompañantes(java.awt.event.ActionEvent evt) {
+        this.vistaRegistroAcompañantes.setVisible(true);
+    }
+
+    private void hacerVisibleVistaRegistroEstadia(java.awt.event.ActionEvent evt) {
+        this.vistaRegistroEstadia.setVisible(true);
+    }
+    
+    private void hacerVisibleRegistroHabitacion (java.awt.event.ActionEvent evt){
+        this.vistaRegistroHabitacion.setVisible(true);
+    }
+    
+    private void hacerVisibleRegistroComidas (java.awt.event.ActionEvent evt){
+        this.vistaRegistroComidas.setVisible(true);
+    }
+    
+    private void hacerVisibleServiciosAdicionales (java.awt.event.ActionEvent evt){
+        this.vistaRegistroServiciosAdicionales.setVisible(true);
+    }
+    
     private void guardarDatosPersonales(java.awt.event.ActionEvent evt) {
-        //Crear y extraer la infromacion del formulario 
-        String nombre = this.mivista.getEntradaNombre().getText();
-        String apellido = this.mivista.getEntradaApellido().getText();
-        int cedula = Integer.parseInt(this.mivista.getEntradaCedula().getText());
-        String correo = this.mivista.getEntradaCorreo().getText();
-        double celular = Double.parseDouble(this.mivista.getEntradaCelular().getText());
-        String direccion = this.mivista.getEntradaDireccion().getText();
+
+        String nombre = this.vistaRegistroInicial.getEntradaNombre().getText();
+        String apellido = this.vistaRegistroInicial.getEntradaApellido().getText();
+        int cedula = Integer.parseInt(this.vistaRegistroInicial.getEntradaCedula().getText());
+        String correo = this.vistaRegistroInicial.getEntradaCorreo().getText();
+        double celular = Double.parseDouble(this.vistaRegistroInicial.getEntradaCelular().getText());
+        String direccion = this.vistaRegistroInicial.getEntradaDireccion().getText();
+
+        this.vistaRegistroInicial.setVisible(false);
 
         JOptionPane.showMessageDialog(mivista, "Se guardaron los datos Correctamente!!");
 
-        this.mivista.getEntradaNombre().setEditable(false);
-        this.mivista.getEntradaApellido().setEditable(false);
-        this.mivista.getEntradaCedula().setEditable(false);
-        this.mivista.getEntradaCorreo().setEditable(false);
-        this.mivista.getEntradaCelular().setEditable(false);
-        this.mivista.getEntradaDireccion().setEditable(false);
+        this.vistaRegistroInicial.getEntradaNombre().setEditable(false);
+        this.vistaRegistroInicial.getEntradaApellido().setEditable(false);
+        this.vistaRegistroInicial.getEntradaCedula().setEditable(false);
+        this.vistaRegistroInicial.getEntradaCorreo().setEditable(false);
+        this.vistaRegistroInicial.getEntradaCelular().setEditable(false);
+        this.vistaRegistroInicial.getEntradaDireccion().setEditable(false);
 
+        this.mivista.setVisible(true);
     }
 
     private void limpiarTabla(DefaultTableModel objetoModelo) {
@@ -133,72 +219,92 @@ public class Controlador {
 
     private void extraerdatosbotonacompañantes(java.awt.event.ActionEvent evt) {
 
-        int numeroNiños = Integer.parseInt(this.mivista.getEntradaNumNiños().getText());
-        int numeroAdultos = Integer.parseInt(this.mivista.getEntradaNnumAdultos().getText());
+        int numeroNiños = Integer.parseInt(this.vistaRegistroAcompañantes.getEntradaNumNiños().getText());
+        int numeroAdultos = Integer.parseInt(this.vistaRegistroAcompañantes.getEntradaNnumAdultos().getText());
         int numeroTotalAcompañantes = numeroNiños + numeroAdultos;
 
         if (numeroNiños == 1) {
             int valorTotalNiños = 35000;
-            this.mivista.getLabelvalorNiños().setText(Integer.toString(valorTotalNiños));
+            this.vistaRegistroAcompañantes.getLabelvalorNiños().setText(Integer.toString(valorTotalNiños));
 
         } else if (numeroNiños == 2) {
             int valorTotalNiños = 70000;
-            this.mivista.getLabelvalorNiños().setText(Integer.toString(valorTotalNiños));
+            this.vistaRegistroAcompañantes.getLabelvalorNiños().setText(Integer.toString(valorTotalNiños));
+
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione una cantidad valida de niños");
-            this.mivista.getEntradaNumNiños().setText("");
+            JOptionPane.showMessageDialog(this.vistaRegistroAcompañantes, "Verifica los datos!!");
+            this.vistaRegistroAcompañantes.getLabelvalorNiños().setText("");
+            this.vistaRegistroAcompañantes.getLabelvalorTotalAcompañantes().setText("");
+            this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().setText("");
 
         }
 
         if (numeroAdultos == 1) {
             int valorTotalAdultos = 40000;
-            this.mivista.getLabelvalorAdultos().setText(Integer.toString(valorTotalAdultos));
+            this.vistaRegistroAcompañantes.getLabelvalorAdultos().setText(Integer.toString(valorTotalAdultos));
+
         } else if (numeroAdultos == 2) {
             int valorTotalAdultos = 80000;
-            this.mivista.getLabelvalorAdultos().setText(Integer.toString(valorTotalAdultos));
+            this.vistaRegistroAcompañantes.getLabelvalorAdultos().setText(Integer.toString(valorTotalAdultos));
+
         } else if (numeroAdultos == 3) {
             int valorTotalAdultos = 120000;
-            this.mivista.getLabelvalorAdultos().setText(Integer.toString(valorTotalAdultos));
+            this.vistaRegistroAcompañantes.getLabelvalorAdultos().setText(Integer.toString(valorTotalAdultos));
+
         } else if (numeroAdultos == 4) {
             int valorTotalAdultos = 160000;
-            this.mivista.getLabelvalorAdultos().setText(Integer.toString(valorTotalAdultos));
+            this.vistaRegistroAcompañantes.getLabelvalorAdultos().setText(Integer.toString(valorTotalAdultos));
+
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione una cantidad valida de adultos");
-            this.mivista.getEntradaNnumAdultos().setText("");
+            JOptionPane.showMessageDialog(this.vistaRegistroAcompañantes, "Verifica los datos!!");
+            this.vistaRegistroAcompañantes.getLabelvalorAdultos().setText("");
+            this.vistaRegistroAcompañantes.getLabelvalorTotalAcompañantes().setText("");
+            this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().setText("");
 
         }
 
-        this.mivista.getLabelTotalAcompañantes().setText(Integer.toString(numeroTotalAcompañantes));
+        if (numeroNiños <= 2 && numeroAdultos <= 4) {
+            JOptionPane.showMessageDialog(this.vistaRegistroAcompañantes, "Registrados correctamente!");
 
-        int valorTotalAcompañantes = (Integer.parseInt(this.mivista.getLabelvalorNiños().getText())) + Integer.parseInt(this.mivista.getLabelvalorAdultos().getText());
-        this.mivista.getLabelvalorTotalAcompañantes().setText(Integer.toString(valorTotalAcompañantes));
+
+        } else {
+
+            this.vistaRegistroAcompañantes.getEntradaNnumAdultos().setText("");
+            this.vistaRegistroAcompañantes.getEntradaNumNiños().setText("");
+            this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().setText("");
+        }
+
+        this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().setText(Integer.toString(numeroTotalAcompañantes));
+
+        int valorTotalAcompañantes = (Integer.parseInt(this.vistaRegistroAcompañantes.getLabelvalorNiños().getText())) + Integer.parseInt(this.vistaRegistroAcompañantes.getLabelvalorAdultos().getText());
+        this.vistaRegistroAcompañantes.getLabelvalorTotalAcompañantes().setText(Integer.toString(valorTotalAcompañantes));
     }
 
     private void extrarDatosBotonEstadia(java.awt.event.ActionEvent evt) {
 
-        int ent_fechallegada = Integer.parseInt(this.mivista.getEntradaFechaLlegada().getText());
-        int ent_fechasalida = Integer.parseInt(this.mivista.getEntradaFechaSalida().getText());
+        int ent_fechallegada = Integer.parseInt(this.vistaRegistroEstadia.getEntradaFechaLlegada().getText());
+        int ent_fechasalida = Integer.parseInt(this.vistaRegistroEstadia.getEntradaFechaSalida().getText());
 
         int noches = ent_fechasalida - ent_fechallegada;
         if (noches <= 0) {
-            JOptionPane.showMessageDialog(mivista, "Ingrese una fecha valida:");
+            JOptionPane.showMessageDialog(vistaRegistroEstadia, "Ingrese una fecha valida:");
         } else {
-            this.mivista.getLabelNumeroNoches().setText(Integer.toString(noches));
+            this.vistaRegistroEstadia.getLabelNumeroNoches().setText(Integer.toString(noches));
 
             int valorTotalAcompañantes = noches * 60000;
-            this.mivista.getLabelCostoTotalNoches().setText(Integer.toString(valorTotalAcompañantes));
-            JOptionPane.showMessageDialog(mivista, "Noches registradas correctamente!");
+            this.vistaRegistroEstadia.getLabelCostoTotalNoches().setText(Integer.toString(valorTotalAcompañantes));
+            JOptionPane.showMessageDialog(vistaRegistroEstadia, "Noches registradas correctamente!");
         }
 
     }
 
     private void extraerDatosBotonHabitacion(java.awt.event.ActionEvent evt) {
 
-        int camas = Integer.parseInt(this.mivista.getLabelHabitacionCamas().getText());
-        int capacidad = Integer.parseInt(this.mivista.getLabelHabitacionCapacidad().getText());
-        int televisores = Integer.parseInt(this.mivista.getLabelHabitacionTelevisores().getText());
-        int balcon = Integer.parseInt(this.mivista.getLabelHabitacionBalcon().getText());
-        int costo = Integer.parseInt(this.mivista.getLabelCostoHabitacion().getText());
+        int camas = Integer.parseInt(this.vistaRegistroHabitacion.getLabelHabitacionCamas().getText());
+        int capacidad = Integer.parseInt(this.vistaRegistroHabitacion.getLabelHabitacionCapacidad().getText());
+        int televisores = Integer.parseInt(this.vistaRegistroHabitacion.getLabelHabitacionTelevisores().getText());
+        int balcon = Integer.parseInt(this.vistaRegistroHabitacion.getLabelHabitacionBalcon().getText());
+        int costo = Integer.parseInt(this.vistaRegistroHabitacion.getLabelCostoHabitacion().getText());
 
         if (camas == 0 || capacidad == 0) {
             JOptionPane.showMessageDialog(mivista, "Por favor, selecciona una opción!");
@@ -213,43 +319,43 @@ public class Controlador {
         HabitacionDuplex habitacionD = new HabitacionDuplex("Duplex", 4, 8, 4, 1200000, true);
         HabitacionJunior habitacionJ = new HabitacionJunior("Junior", 2, 4, 2, 800000, false);
         HabitacionSencilla habitacionS = new HabitacionSencilla("Sencilla", 1, 1, 0, 500000, false);
-        String seleccion = this.mivista.getComboboxHabitacion().getSelectedItem().toString();
+        String seleccion = this.vistaRegistroHabitacion.getComboboxHabitacion().getSelectedItem().toString();
 
         if (seleccion == "Duplex") {
-            this.mivista.getLabelHabitacionCamas().setText(Integer.toString(habitacionD.getCamas()));
-            this.mivista.getLabelHabitacionCapacidad().setText(Integer.toString(habitacionD.getCapacidad()));
-            this.mivista.getLabelHabitacionTelevisores().setText(Integer.toString(habitacionD.getTelevisores()));
-            this.mivista.getLabelHabitacionBalcon().setText(Integer.toString(1));
-            this.mivista.getLabelCostoHabitacion().setText(Integer.toString(habitacionD.getCosto()));
+            this.vistaRegistroHabitacion.getLabelHabitacionCamas().setText(Integer.toString(habitacionD.getCamas()));
+            this.vistaRegistroHabitacion.getLabelHabitacionCapacidad().setText(Integer.toString(habitacionD.getCapacidad()));
+            this.vistaRegistroHabitacion.getLabelHabitacionTelevisores().setText(Integer.toString(habitacionD.getTelevisores()));
+            this.vistaRegistroHabitacion.getLabelHabitacionBalcon().setText(Integer.toString(1));
+            this.vistaRegistroHabitacion.getLabelCostoHabitacion().setText(Integer.toString(habitacionD.getCosto()));
 
         } else if (seleccion == "Junior") {
-            this.mivista.getLabelHabitacionCamas().setText(Integer.toString(habitacionJ.getCamas()));
-            this.mivista.getLabelHabitacionCapacidad().setText(Integer.toString(habitacionJ.getCapacidad()));
-            this.mivista.getLabelHabitacionTelevisores().setText(Integer.toString(habitacionJ.getTelevisores()));
-            this.mivista.getLabelHabitacionBalcon().setText(Integer.toString(0));
-            this.mivista.getLabelCostoHabitacion().setText(Integer.toString(habitacionJ.getCosto()));
+            this.vistaRegistroHabitacion.getLabelHabitacionCamas().setText(Integer.toString(habitacionJ.getCamas()));
+            this.vistaRegistroHabitacion.getLabelHabitacionCapacidad().setText(Integer.toString(habitacionJ.getCapacidad()));
+            this.vistaRegistroHabitacion.getLabelHabitacionTelevisores().setText(Integer.toString(habitacionJ.getTelevisores()));
+            this.vistaRegistroHabitacion.getLabelHabitacionBalcon().setText(Integer.toString(0));
+            this.vistaRegistroHabitacion.getLabelCostoHabitacion().setText(Integer.toString(habitacionJ.getCosto()));
 
         } else if (seleccion == "Sencilla") {
-            this.mivista.getLabelHabitacionCamas().setText(Integer.toString(habitacionS.getCamas()));
-            this.mivista.getLabelHabitacionCapacidad().setText(Integer.toString(habitacionS.getCapacidad()));
-            this.mivista.getLabelHabitacionTelevisores().setText(Integer.toString(habitacionS.getTelevisores()));
-            this.mivista.getLabelHabitacionBalcon().setText(Integer.toString(0));
-            this.mivista.getLabelCostoHabitacion().setText(Integer.toString(habitacionS.getCosto()));
+            this.vistaRegistroHabitacion.getLabelHabitacionCamas().setText(Integer.toString(habitacionS.getCamas()));
+            this.vistaRegistroHabitacion.getLabelHabitacionCapacidad().setText(Integer.toString(habitacionS.getCapacidad()));
+            this.vistaRegistroHabitacion.getLabelHabitacionTelevisores().setText(Integer.toString(habitacionS.getTelevisores()));
+            this.vistaRegistroHabitacion.getLabelHabitacionBalcon().setText(Integer.toString(0));
+            this.vistaRegistroHabitacion.getLabelCostoHabitacion().setText(Integer.toString(habitacionS.getCosto()));
 
         } else {
             JOptionPane.showMessageDialog(mivista, "Por favor, selecciona una opción!");
-            this.mivista.getLabelHabitacionCamas().setText(Integer.toString(0));
-            this.mivista.getLabelHabitacionCapacidad().setText(Integer.toString(0));
-            this.mivista.getLabelHabitacionTelevisores().setText(Integer.toString(0));
-            this.mivista.getLabelHabitacionBalcon().setText(Integer.toString(0));
-            this.mivista.getLabelCostoHabitacion().setText(Integer.toString(0));
+            this.vistaRegistroHabitacion.getLabelHabitacionCamas().setText(Integer.toString(0));
+            this.vistaRegistroHabitacion.getLabelHabitacionCapacidad().setText(Integer.toString(0));
+            this.vistaRegistroHabitacion.getLabelHabitacionTelevisores().setText(Integer.toString(0));
+            this.vistaRegistroHabitacion.getLabelHabitacionBalcon().setText(Integer.toString(0));
+            this.vistaRegistroHabitacion.getLabelCostoHabitacion().setText(Integer.toString(0));
         }
     }
 
     private void elegirComida(java.awt.event.ActionEvent evt) {
-        int numeroNochesComida = Integer.parseInt(this.mivista.getLabelNochesComida().getText());
-        int numeroAcompañantesComida = Integer.parseInt(this.mivista.getLabelAcompañantesComida().getText());
-        int costoTotal = Integer.parseInt(this.mivista.getLabelCostoComida().getText());
+        int numeroNochesComida = Integer.parseInt(this.vistaRegistroComidas.getLabelNochesComida().getText());
+        int numeroAcompañantesComida = Integer.parseInt(this.vistaRegistroComidas.getLabelAcompañantesComida().getText());
+        int costoTotal = Integer.parseInt(this.vistaRegistroComidas.getLabelCostoComida().getText());
 
         if (numeroNochesComida == 0 || numeroAcompañantesComida == 0 || costoTotal == 0) {
             JOptionPane.showMessageDialog(mivista, "Por favor, selecciona una opción!");
@@ -266,15 +372,15 @@ public class Controlador {
         AlmuerzoYRefrigerio comida3 = new AlmuerzoYRefrigerio("Almuerzo y Refrigerio");
         TresComidas comida4 = new TresComidas("Desayuno Almuerzo y Cena");
         //COmbo box y variables
-        String seleccion = this.mivista.getComboBoxComida().getSelectedItem().toString();
+        String seleccion = this.vistaRegistroComidas.getComboBoxComida().getSelectedItem().toString();
         int costoTotalComida = 0;
 
-        int numeroNoches = Integer.parseInt(this.mivista.getLabelNumeroNoches().getText());
-        int numeroAdultos = Integer.parseInt(this.mivista.getEntradaNnumAdultos().getText());
-        int numeroNiños = Integer.parseInt(this.mivista.getEntradaNumNiños().getText());
+        int numeroNoches = Integer.parseInt(this.vistaRegistroEstadia.getLabelNumeroNoches().getText());
+        int numeroAdultos = Integer.parseInt(this.vistaRegistroAcompañantes.getEntradaNnumAdultos().getText());
+        int numeroNiños = Integer.parseInt(this.vistaRegistroAcompañantes.getEntradaNumNiños().getText());
 
-        this.mivista.getLabelNochesComida().setText(Integer.toString(numeroNoches));
-        this.mivista.getLabelAcompañantesComida().setText((this.mivista.getLabelTotalAcompañantes().getText()));
+        this.vistaRegistroComidas.getLabelNochesComida().setText(Integer.toString(numeroNoches));
+        this.vistaRegistroComidas.getLabelAcompañantesComida().setText((this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().getText()));
         if (seleccion == "Desayuno - $15.000") {
             costoTotalComida = comida1.definirCosto(numeroNiños, numeroAdultos, numeroNoches);
 
@@ -289,12 +395,12 @@ public class Controlador {
 
         } else {
             JOptionPane.showMessageDialog(mivista, "Por favor, selecciona una opción!");
-            this.mivista.getLabelAcompañantesComida().setText(Integer.toString(0));
-            this.mivista.getLabelNochesComida().setText(Integer.toString(0));
-            this.mivista.getLabelCostoComida().setText(Integer.toString(0));
+            this.vistaRegistroComidas.getLabelAcompañantesComida().setText(Integer.toString(0));
+            this.vistaRegistroComidas.getLabelNochesComida().setText(Integer.toString(0));
+            this.vistaRegistroComidas.getLabelCostoComida().setText(Integer.toString(0));
         }
 
-        this.mivista.getLabelCostoComida().setText(Integer.toString(costoTotalComida));
+        this.vistaRegistroComidas.getLabelCostoComida().setText(Integer.toString(costoTotalComida));
     }
 
     private void elegirServicioAdicional(java.awt.event.ActionEvent evt) {
@@ -305,25 +411,25 @@ public class Controlador {
         Spa spa = new Spa(310000);
         Piscina piscina = new Piscina(65000);
 
-        if ((this.mivista.getCheckboxNinguno().isSelected() && this.mivista.getCheckboxGimnasio().isSelected())
-                || (this.mivista.getCheckboxNinguno().isSelected() && this.mivista.getCheckboxSpa().isSelected())
-                || (this.mivista.getCheckboxNinguno().isSelected() && this.mivista.getCheckboxPiscina().isSelected())) {
-            this.mivista.getCheckboxGimnasio().setSelected(false);
-            this.mivista.getCheckboxSpa().setSelected(false);
-            this.mivista.getCheckboxPiscina().setSelected(false);
-            this.mivista.getCheckboxNinguno().setSelected(false);
+        if ((this.vistaRegistroServiciosAdicionales.getCheckboxNinguno().isSelected() && this.vistaRegistroServiciosAdicionales.getCheckboxGimnasio().isSelected())
+                || (this.vistaRegistroServiciosAdicionales.getCheckboxNinguno().isSelected() && this.vistaRegistroServiciosAdicionales.getCheckboxSpa().isSelected())
+                || (this.vistaRegistroServiciosAdicionales.getCheckboxNinguno().isSelected() && this.vistaRegistroServiciosAdicionales.getCheckboxPiscina().isSelected())) {
+            this.vistaRegistroServiciosAdicionales.getCheckboxGimnasio().setSelected(false);
+            this.vistaRegistroServiciosAdicionales.getCheckboxSpa().setSelected(false);
+            this.vistaRegistroServiciosAdicionales.getCheckboxPiscina().setSelected(false);
+            this.vistaRegistroServiciosAdicionales.getCheckboxNinguno().setSelected(false);
 
             JOptionPane.showMessageDialog(mivista, "Error, selecciona una opcion correcta");
 
         } else {
-            costoGimansio = gimnasio.seleccionarServicio(this.mivista);
-            costoSpa = spa.seleccionarServicio(this.mivista);
-            costoPiscina = piscina.seleccionarServicio(this.mivista);
+            costoGimansio = gimnasio.seleccionarServicio(this.vistaRegistroServiciosAdicionales);
+            costoSpa = spa.seleccionarServicio(this.vistaRegistroServiciosAdicionales);
+            costoPiscina = piscina.seleccionarServicio(this.vistaRegistroServiciosAdicionales);
             JOptionPane.showMessageDialog(mivista, "Seleccionado con exito");
         }
 
         int totalServiciosAdicionales = costoGimansio + costoSpa + costoPiscina;
-        this.mivista.getLabelCostoTotalAdicionales().setText(Integer.toString(totalServiciosAdicionales));
+        this.vistaRegistroServiciosAdicionales.getLabelCostoTotalAdicionales().setText(Integer.toString(totalServiciosAdicionales));
 
     }
 
@@ -358,19 +464,19 @@ public class Controlador {
     }*/
     private void hacerReserva(java.awt.event.ActionEvent evt) {
 
-        String nombre = this.mivista.getEntradaNombre().getText();
-        String apellido = this.mivista.getEntradaApellido().getText();
-        int cedula = Integer.parseInt(this.mivista.getEntradaCedula().getText());
-        int acompañantes = Integer.parseInt(this.mivista.getLabelTotalAcompañantes().getText());
-        int noches = Integer.parseInt(this.mivista.getLabelNumeroNoches().getText());
-        String habitacion = this.mivista.getComboboxHabitacion().getSelectedItem().toString();
-        String comida = this.mivista.getComboBoxComida().getSelectedItem().toString();
+        String nombre = this.vistaRegistroInicial.getEntradaNombre().getText();
+        String apellido = this.vistaRegistroInicial.getEntradaApellido().getText();
+        int cedula = Integer.parseInt(this.vistaRegistroInicial.getEntradaCedula().getText());
+        int acompañantes = Integer.parseInt(this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().getText());
+        int noches = Integer.parseInt(this.vistaRegistroEstadia.getLabelNumeroNoches().getText());
+        String habitacion = this.vistaRegistroHabitacion.getComboboxHabitacion().getSelectedItem().toString();
+        String comida = this.vistaRegistroComidas.getComboBoxComida().getSelectedItem().toString();
 
-        int costoAcompañantes = Integer.parseInt(this.mivista.getLabelvalorTotalAcompañantes().getText());
-        int costoHabitacion = Integer.parseInt(this.mivista.getLabelCostoHabitacion().getText());
-        int costoComida = Integer.parseInt(this.mivista.getLabelCostoComida().getText());
-        int costoNoches = Integer.parseInt(this.mivista.getLabelCostoTotalNoches().getText());
-        int costoAdicionales = Integer.parseInt(this.mivista.getLabelCostoTotalAdicionales().getText());
+        int costoAcompañantes = Integer.parseInt(this.vistaRegistroAcompañantes.getLabelvalorTotalAcompañantes().getText());
+        int costoHabitacion = Integer.parseInt(this.vistaRegistroHabitacion.getLabelCostoHabitacion().getText());
+        int costoComida = Integer.parseInt(this.vistaRegistroComidas.getLabelCostoComida().getText());
+        int costoNoches = Integer.parseInt(this.vistaRegistroEstadia.getLabelCostoTotalNoches().getText());
+        int costoAdicionales = Integer.parseInt(this.vistaRegistroServiciosAdicionales.getLabelCostoTotalAdicionales().getText());
 
         Reserva objetoReserva = new Reserva(nombre, apellido, cedula, acompañantes, noches, habitacion, comida);
         objetoReserva.definirCosto(costoAcompañantes, costoHabitacion, costoComida, costoNoches, costoAdicionales);
@@ -387,47 +493,47 @@ public class Controlador {
         limpiarFormulario();
         JOptionPane.showMessageDialog(mivista, "Datos registrados Correctamente!");
 
-        this.mivista.getEntradaNombre().setEditable(true);
-        this.mivista.getEntradaApellido().setEditable(true);
-        this.mivista.getEntradaCedula().setEditable(true);
-        this.mivista.getEntradaCorreo().setEditable(true);
-        this.mivista.getEntradaCelular().setEditable(true);
-        this.mivista.getEntradaDireccion().setEditable(true);
+        this.vistaRegistroInicial.getEntradaNombre().setEditable(true);
+        this.vistaRegistroInicial.getEntradaApellido().setEditable(true);
+        this.vistaRegistroInicial.getEntradaCedula().setEditable(true);
+        this.vistaRegistroInicial.getEntradaCorreo().setEditable(true);
+        this.vistaRegistroInicial.getEntradaCelular().setEditable(true);
+        this.vistaRegistroInicial.getEntradaDireccion().setEditable(true);
     }
 
     private void limpiarFormulario() {
-        this.mivista.getEntradaNombre().setText("");
-        this.mivista.getEntradaApellido().setText("");
-        this.mivista.getEntradaCedula().setText("");
-        this.mivista.getEntradaCorreo().setText("");
-        this.mivista.getEntradaCelular().setText("");
-        this.mivista.getEntradaDireccion().setText("");
-        this.mivista.getEntradaNumNiños().setText("");
-        this.mivista.getEntradaNnumAdultos().setText("");
-        this.mivista.getLabelvalorNiños().setText("");
-        this.mivista.getLabelvalorAdultos().setText("");
-        this.mivista.getLabelvalorTotalAcompañantes().setText("");
-        this.mivista.getLabelTotalAcompañantes().setText("");
-        this.mivista.getLabelCostoTotalAdicionales().setText("");
-        this.mivista.getEntradaFechaLlegada().setText("");
-        this.mivista.getEntradaFechaSalida().setText("");
-        this.mivista.getLabelNumeroNoches().setText("");
-        this.mivista.getLabelCostoTotalNoches().setText("");
-        this.mivista.getComboBoxComida().setSelectedItem(("Selecciona"));
-        this.mivista.getLabelAcompañantesComida().setText("");
-        this.mivista.getLabelNochesComida().setText("");
-        this.mivista.getLabelCostoComida().setText("");
-        this.mivista.getLabelHabitacionCamas().setText(Integer.toString(0));
-        this.mivista.getLabelHabitacionCapacidad().setText(Integer.toString(0));
-        this.mivista.getLabelHabitacionTelevisores().setText(Integer.toString(0));
-        this.mivista.getLabelHabitacionBalcon().setText(Integer.toString(0));
-        this.mivista.getLabelCostoHabitacion().setText(Integer.toString(0));
-        this.mivista.getComboboxHabitacion().setSelectedItem("Selecciona");
-        this.mivista.getCheckboxGimnasio().setSelected(false);
-        this.mivista.getCheckboxSpa().setSelected(false);
-        this.mivista.getCheckboxPiscina().setSelected(false);
-        this.mivista.getCheckboxNinguno().setSelected(false);
-        this.mivista.getLabelCostoTotalAdicionales().setText("");
+        this.vistaRegistroInicial.getEntradaNombre().setText("");
+        this.vistaRegistroInicial.getEntradaApellido().setText("");
+        this.vistaRegistroInicial.getEntradaCedula().setText("");
+        this.vistaRegistroInicial.getEntradaCorreo().setText("");
+        this.vistaRegistroInicial.getEntradaCelular().setText("");
+        this.vistaRegistroInicial.getEntradaDireccion().setText("");
+        this.vistaRegistroAcompañantes.getEntradaNumNiños().setText("");
+        this.vistaRegistroAcompañantes.getEntradaNnumAdultos().setText("");
+        this.vistaRegistroAcompañantes.getLabelvalorNiños().setText("");
+        this.vistaRegistroAcompañantes.getLabelvalorAdultos().setText("");
+        this.vistaRegistroAcompañantes.getLabelvalorTotalAcompañantes().setText("");
+        this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().setText("");
+        this.vistaRegistroServiciosAdicionales.getLabelCostoTotalAdicionales().setText("");
+        this.vistaRegistroEstadia.getEntradaFechaLlegada().setText("");
+        this.vistaRegistroEstadia.getEntradaFechaSalida().setText("");
+        this.vistaRegistroEstadia.getLabelNumeroNoches().setText("");
+        this.vistaRegistroEstadia.getLabelCostoTotalNoches().setText("");
+        this.vistaRegistroComidas.getComboBoxComida().setSelectedItem(("Selecciona"));
+        this.vistaRegistroComidas.getLabelAcompañantesComida().setText("");
+        this.vistaRegistroComidas.getLabelNochesComida().setText("");
+        this.vistaRegistroComidas.getLabelCostoComida().setText("");
+        this.vistaRegistroHabitacion.getLabelHabitacionCamas().setText(Integer.toString(0));
+        this.vistaRegistroHabitacion.getLabelHabitacionCapacidad().setText(Integer.toString(0));
+        this.vistaRegistroHabitacion.getLabelHabitacionTelevisores().setText(Integer.toString(0));
+        this.vistaRegistroHabitacion.getLabelHabitacionBalcon().setText(Integer.toString(0));
+        this.vistaRegistroHabitacion.getLabelCostoHabitacion().setText(Integer.toString(0));
+        this.vistaRegistroHabitacion.getComboboxHabitacion().setSelectedItem("Selecciona");
+        this.vistaRegistroServiciosAdicionales.getCheckboxGimnasio().setSelected(false);
+        this.vistaRegistroServiciosAdicionales.getCheckboxSpa().setSelected(false);
+        this.vistaRegistroServiciosAdicionales.getCheckboxPiscina().setSelected(false);
+        this.vistaRegistroServiciosAdicionales.getCheckboxNinguno().setSelected(false);
+        this.vistaRegistroServiciosAdicionales.getLabelCostoTotalAdicionales().setText("");
 
     }
 }

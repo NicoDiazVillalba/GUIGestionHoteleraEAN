@@ -1,6 +1,7 @@
-package modelo;
+package modelo.serviciosAdicionales;
 
 import vista.vistaPrincipal;
+import vista.vistaRegistroServiciosAdicionales;
 
 public class Gimnasio extends ServiciosAdicionales {
 
@@ -8,7 +9,7 @@ public class Gimnasio extends ServiciosAdicionales {
         super(costo);
     }
    
-    public int seleccionarServicio(vistaPrincipal vista) {
+    public int seleccionarServicio(vistaRegistroServiciosAdicionales vista) {
         int costoGimansio;
         if (vista.getCheckboxGimnasio().isSelected()) {
             costoGimansio = 240000;

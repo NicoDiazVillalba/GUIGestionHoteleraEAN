@@ -1,7 +1,8 @@
-package modelo;
+package modelo.serviciosAdicionales;
 
 import javax.swing.JOptionPane;
 import vista.vistaPrincipal;
+import vista.vistaRegistroServiciosAdicionales;
 
 public class Piscina extends ServiciosAdicionales {
 
@@ -9,7 +10,7 @@ public class Piscina extends ServiciosAdicionales {
         super(costo);
     }
 
-    public int seleccionarServicio(vistaPrincipal vista ) {
+    public int seleccionarServicio(vistaRegistroServiciosAdicionales vista ) {
         int costoPisicina;
         if (vista.getCheckboxPiscina().isSelected()) {
             costoPisicina = 65000;

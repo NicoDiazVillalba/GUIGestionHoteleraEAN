@@ -1,5 +1,5 @@
 
-package modelo;
+package modelo.comidas;
 
 import javax.swing.JOptionPane;
 

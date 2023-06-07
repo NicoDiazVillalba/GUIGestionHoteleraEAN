@@ -1,5 +1,5 @@
 
-package modelo;
+package modelo.reserva;
 
 
 public class Reserva {

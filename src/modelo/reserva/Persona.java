@@ -1,4 +1,4 @@
-package modelo;
+package modelo.reserva;
 
 
 public abstract class Persona {

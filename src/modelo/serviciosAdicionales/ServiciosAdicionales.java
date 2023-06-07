@@ -1,8 +1,8 @@
 
-package modelo;
+package modelo.serviciosAdicionales;
 
 
-public class ServiciosAdicionales{
+public abstract class ServiciosAdicionales{
     
     public int costo;
 
