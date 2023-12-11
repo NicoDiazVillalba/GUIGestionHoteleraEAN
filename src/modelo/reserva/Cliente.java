@@ -18,8 +18,8 @@ public class Cliente extends Persona {
     public int costo_total;
     
 
-    public Cliente(String ent_nombre, String ent_apellido, int ent_cedula, String ent_correo, double ent_celular, String ent_direccion) {
-        super(ent_nombre, ent_apellido, ent_cedula, ent_correo, ent_celular, ent_direccion);
+    public Cliente(String ent_nombre, String ent_apellido, int ent_cedula, String ent_correo, double ent_celular, String ent_direccion,String ent_genero) {
+        super(ent_nombre, ent_apellido, ent_cedula, ent_correo, ent_celular, ent_direccion,ent_genero);
     }
     
      

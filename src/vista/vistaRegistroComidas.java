@@ -46,7 +46,7 @@ public class vistaRegistroComidas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel6.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel6.setBackground(new java.awt.Color(227, 242, 193));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Servicio de Alimento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jLabel30.setText("Tipo:");
@@ -62,6 +62,7 @@ public class vistaRegistroComidas extends javax.swing.JFrame {
         jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel34.setText("Costo Total Comida: ");
 
+        jLabel35.setBackground(new java.awt.Color(227, 242, 193));
         jLabel35.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabel35.setText("<html>Tenga en cuenta que el costo varia dependiendo el numero de personas y noches de estadia<html>");
 

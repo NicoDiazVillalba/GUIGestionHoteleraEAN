@@ -6,7 +6,9 @@ package vista;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -32,9 +34,7 @@ public class vistaRegistroAcompañantes extends javax.swing.JFrame {
 
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        entradaNumNiños = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        entradaNnumAdultos = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -49,21 +49,17 @@ public class vistaRegistroAcompañantes extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        spinnerNinos = new javax.swing.JSpinner();
+        spinnerAdultos = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel4.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel4.setBackground(new java.awt.Color(227, 242, 193));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de acompañantes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         jPanel4.setAutoscrolls(true);
         jPanel4.setPreferredSize(new java.awt.Dimension(359, 233));
 
         jLabel8.setText("Acompañantes menores de edad (Máximo 2): ");
-
-        entradaNumNiños.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                entradaNumNiñosActionPerformed(evt);
-            }
-        });
 
         jLabel9.setText("Acompañantes adultos (Máximo 4): ");
 
@@ -99,6 +95,19 @@ public class vistaRegistroAcompañantes extends javax.swing.JFrame {
 
         jLabel23.setText("$");
 
+        SpinnerNumberModel spinnerN =  new SpinnerNumberModel();
+        spinnerN.setMaximum(2);
+        spinnerN.setMinimum(0);
+        spinnerN.setStepSize(1);
+        spinnerNinos.setModel(spinnerN);
+
+        SpinnerNumberModel spinnerA =  new SpinnerNumberModel();
+        spinnerA.setMaximum(4);
+        spinnerA.setMinimum(1);
+        spinnerA.setStepSize(1);
+        spinnerA.setValue(1);
+        spinnerAdultos.setModel(spinnerA);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -107,7 +116,7 @@ public class vistaRegistroAcompañantes extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 19, Short.MAX_VALUE)
+                        .addGap(0, 24, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -121,15 +130,14 @@ public class vistaRegistroAcompañantes extends javax.swing.JFrame {
                         .addComponent(labelTotalAcompañantes, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botoningresarDatosAcompañantes))
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(entradaNnumAdultos)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -145,7 +153,8 @@ public class vistaRegistroAcompañantes extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(labelvalorTotalAcompañantes, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(entradaNumNiños))))
+                            .addComponent(spinnerNinos)
+                            .addComponent(spinnerAdultos))))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -154,13 +163,13 @@ public class vistaRegistroAcompañantes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(entradaNumNiños, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinnerNinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(entradaNnumAdultos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinnerAdultos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
@@ -200,8 +209,8 @@ public class vistaRegistroAcompañantes extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(10, 10, 10)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(11, Short.MAX_VALUE)))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,23 +225,12 @@ public class vistaRegistroAcompañantes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void entradaNumNiñosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entradaNumNiñosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_entradaNumNiñosActionPerformed
-
 
 
     public JButton getBotoningresarDatosAcompañantes() {
         return botoningresarDatosAcompañantes;
     }
 
-    public JTextField getEntradaNnumAdultos() {
-        return entradaNnumAdultos;
-    }
-
-    public JTextField getEntradaNumNiños() {
-        return entradaNumNiños;
-    }
 
     public JLabel getLabelTotalAcompañantes() {
         return labelTotalAcompañantes;
@@ -250,12 +248,20 @@ public class vistaRegistroAcompañantes extends javax.swing.JFrame {
         return labelvalorTotalAcompañantes;
     }
 
+    public JSpinner getSpinnerAdultos() {
+        return spinnerAdultos;
+    }
+
+    public JSpinner getSpinnerNinos() {
+        return spinnerNinos;
+    }
+    
+    
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botoningresarDatosAcompañantes;
-    private javax.swing.JTextField entradaNnumAdultos;
-    private javax.swing.JTextField entradaNumNiños;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -272,5 +278,7 @@ public class vistaRegistroAcompañantes extends javax.swing.JFrame {
     private javax.swing.JLabel labelvalorAdultos;
     private javax.swing.JLabel labelvalorNiños;
     private javax.swing.JLabel labelvalorTotalAcompañantes;
+    private javax.swing.JSpinner spinnerAdultos;
+    private javax.swing.JSpinner spinnerNinos;
     // End of variables declaration//GEN-END:variables
 }

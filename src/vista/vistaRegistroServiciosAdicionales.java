@@ -42,13 +42,13 @@ public class vistaRegistroServiciosAdicionales extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel7.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel7.setBackground(new java.awt.Color(227, 242, 193));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Servicios Adicionales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jLabel37.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabel37.setText("<html>Selecciona algún servicio adicional que quieras adquirir. Si no es el caso, selecciona la casilla ''Ninguno'' y confirma<html>");
 
-        checkboxGimnasio.setBackground(new java.awt.Color(252, 102, 102));
+        checkboxGimnasio.setBackground(new java.awt.Color(227, 242, 193));
         checkboxGimnasio.setText("Gimnasio - $240.000");
         checkboxGimnasio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,10 +56,10 @@ public class vistaRegistroServiciosAdicionales extends javax.swing.JFrame {
             }
         });
 
-        checkboxPiscina.setBackground(new java.awt.Color(252, 102, 102));
+        checkboxPiscina.setBackground(new java.awt.Color(227, 242, 193));
         checkboxPiscina.setText("Piscina - $65.000");
 
-        checkboxSpa.setBackground(new java.awt.Color(252, 102, 102));
+        checkboxSpa.setBackground(new java.awt.Color(227, 242, 193));
         checkboxSpa.setText("Spa - $310.000");
         checkboxSpa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +67,7 @@ public class vistaRegistroServiciosAdicionales extends javax.swing.JFrame {
             }
         });
 
-        checkboxNinguno.setBackground(new java.awt.Color(252, 102, 102));
+        checkboxNinguno.setBackground(new java.awt.Color(227, 242, 193));
         checkboxNinguno.setText("Ninguno");
         checkboxNinguno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

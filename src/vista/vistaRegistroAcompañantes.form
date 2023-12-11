@@ -25,10 +25,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Component id="jPanel4" min="-2" pref="379" max="-2" attributes="0"/>
-                  <EmptySpace pref="11" max="32767" attributes="0"/>
+                  <Component id="jPanel4" pref="384" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -37,7 +37,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel4" pref="288" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -50,7 +50,7 @@
     <Container class="javax.swing.JPanel" name="jPanel4">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="ff" type="rgb"/>
+          <Color blue="c1" green="f2" red="e3" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -72,7 +72,7 @@
                   <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
@@ -91,17 +91,16 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="botoningresarDatosAcompañantes" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel14" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel14" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
+                              <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="entradaNnumAdultos" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel21" min="-2" pref="14" max="-2" attributes="0"/>
@@ -121,7 +120,8 @@
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="entradaNumNiños" alignment="0" max="32767" attributes="0"/>
+                              <Component id="spinnerNinos" max="32767" attributes="0"/>
+                              <Component id="spinnerAdultos" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -135,14 +135,14 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entradaNumNiños" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="spinnerNinos" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="entradaNnumAdultos" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="spinnerAdultos" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -190,17 +190,10 @@
             <Property name="text" type="java.lang.String" value="Acompa&#xf1;antes menores de edad (M&#xe1;ximo 2): "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="entradaNumNi&#xf1;os">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="entradaNumNi&#xf1;osActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
             <Property name="text" type="java.lang.String" value="Acompa&#xf1;antes adultos (M&#xe1;ximo 4): "/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="entradaNnumAdultos">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
@@ -283,6 +276,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="$"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="spinnerNinos">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="SpinnerNumberModel spinnerN =  new SpinnerNumberModel();&#xa;spinnerN.setMaximum(2);&#xa;spinnerN.setMinimum(0);&#xa;spinnerN.setStepSize(1);&#xa;spinnerNinos.setModel(spinnerN);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="spinnerAdultos">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="SpinnerNumberModel spinnerA =  new SpinnerNumberModel();&#xa;spinnerA.setMaximum(4);&#xa;spinnerA.setMinimum(1);&#xa;spinnerA.setStepSize(1);&#xa;spinnerA.setValue(1);&#xa;spinnerAdultos.setModel(spinnerA);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

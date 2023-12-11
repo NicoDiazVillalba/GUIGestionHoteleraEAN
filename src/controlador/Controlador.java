@@ -1,5 +1,7 @@
 package controlador;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.comidas.AlmuerzoYRefrigerio;
@@ -15,6 +17,7 @@ import modelo.serviciosAdicionales.Piscina;
 import modelo.reserva.Reserva;
 import modelo.serviciosAdicionales.Spa;
 import modelo.comidas.TresComidas;
+import modelo.consultareservas.ConsultasReservas;
 import vista.vistaPrincipal;
 import vista.vistaRegistroAcompañantes;
 import vista.vistaRegistroComidas;
@@ -33,9 +36,8 @@ public class Controlador {
     private vistaRegistroComidas vistaRegistroComidas;
     private vistaRegistroServiciosAdicionales vistaRegistroServiciosAdicionales;
     private ListaClientes miLista = new ListaClientes();
-    private ListaReserva miListaReserva = new ListaReserva();
 
-    public Controlador(vistaPrincipal objetoGUI, vistaRegistroInicial objetoGUIRegistroInicial, vistaRegistroAcompañantes objetoGuiAcompañantes, vistaRegistroEstadia objetoGUIRegistroEstadia, vistaRegistroHabitacion objetoGUIRegistroHabitacion,vistaRegistroComidas objetoGUIRegistroComidas,vistaRegistroServiciosAdicionales objetoGUIRegistroServiciosAdicionales) {
+    public Controlador(vistaPrincipal objetoGUI, vistaRegistroInicial objetoGUIRegistroInicial, vistaRegistroAcompañantes objetoGuiAcompañantes, vistaRegistroEstadia objetoGUIRegistroEstadia, vistaRegistroHabitacion objetoGUIRegistroHabitacion, vistaRegistroComidas objetoGUIRegistroComidas, vistaRegistroServiciosAdicionales objetoGUIRegistroServiciosAdicionales) {
         this.mivista = objetoGUI;
         this.vistaRegistroInicial = objetoGUIRegistroInicial;
         this.vistaRegistroAcompañantes = objetoGuiAcompañantes;
@@ -45,6 +47,8 @@ public class Controlador {
         this.vistaRegistroServiciosAdicionales = objetoGUIRegistroServiciosAdicionales;
         this.mivista.setVisible(true);
         accionarBotones();
+        ConsultasReservas consulta = new ConsultasReservas();
+        consulta.mostrarDatosTabla(this.mivista);
 
     }
 
@@ -85,7 +89,7 @@ public class Controlador {
             }
 
         });
-        
+
         this.mivista.getBotonVistaRegistroHabitacion().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hacerVisibleRegistroHabitacion(evt);
@@ -121,7 +125,7 @@ public class Controlador {
                 hacerVisibleRegistroComidas(evt);
             }
         });
-        
+
         this.vistaRegistroComidas.getBotonIngresarComida().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 elegirComida(evt);
@@ -137,7 +141,7 @@ public class Controlador {
             }
 
         });
-        
+
         this.mivista.getBotonVistaServiciosAdicionales().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hacerVisibleServiciosAdicionales(evt);
@@ -161,6 +165,14 @@ public class Controlador {
             }
 
         });
+
+        this.mivista.getBotonMostrar().addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarTabla(evt);
+
+            }
+
+        });
     }
 
     private void hacerVisibleVistaRegistroInicial(java.awt.event.ActionEvent evt) {
@@ -174,60 +186,43 @@ public class Controlador {
     private void hacerVisibleVistaRegistroEstadia(java.awt.event.ActionEvent evt) {
         this.vistaRegistroEstadia.setVisible(true);
     }
-    
-    private void hacerVisibleRegistroHabitacion (java.awt.event.ActionEvent evt){
+
+    private void hacerVisibleRegistroHabitacion(java.awt.event.ActionEvent evt) {
         this.vistaRegistroHabitacion.setVisible(true);
     }
-    
-    private void hacerVisibleRegistroComidas (java.awt.event.ActionEvent evt){
+
+    private void hacerVisibleRegistroComidas(java.awt.event.ActionEvent evt) {
         this.vistaRegistroComidas.setVisible(true);
     }
-    
-    private void hacerVisibleServiciosAdicionales (java.awt.event.ActionEvent evt){
+
+    private void hacerVisibleServiciosAdicionales(java.awt.event.ActionEvent evt) {
         this.vistaRegistroServiciosAdicionales.setVisible(true);
     }
-    
-    private void guardarDatosPersonales(java.awt.event.ActionEvent evt) {
 
-        String nombre = this.vistaRegistroInicial.getEntradaNombre().getText();
-        String apellido = this.vistaRegistroInicial.getEntradaApellido().getText();
-        int cedula = Integer.parseInt(this.vistaRegistroInicial.getEntradaCedula().getText());
-        String correo = this.vistaRegistroInicial.getEntradaCorreo().getText();
-        double celular = Double.parseDouble(this.vistaRegistroInicial.getEntradaCelular().getText());
-        String direccion = this.vistaRegistroInicial.getEntradaDireccion().getText();
+    private void guardarDatosPersonales(java.awt.event.ActionEvent evt) {
 
         this.vistaRegistroInicial.setVisible(false);
 
         JOptionPane.showMessageDialog(mivista, "Se guardaron los datos Correctamente!!");
 
-        this.vistaRegistroInicial.getEntradaNombre().setEditable(false);
-        this.vistaRegistroInicial.getEntradaApellido().setEditable(false);
-        this.vistaRegistroInicial.getEntradaCedula().setEditable(false);
-        this.vistaRegistroInicial.getEntradaCorreo().setEditable(false);
-        this.vistaRegistroInicial.getEntradaCelular().setEditable(false);
-        this.vistaRegistroInicial.getEntradaDireccion().setEditable(false);
-
         this.mivista.setVisible(true);
-    }
-
-    private void limpiarTabla(DefaultTableModel objetoModelo) {
-        for (int i = 0; i < objetoModelo.getRowCount(); i++) {
-            objetoModelo.removeRow(i);
-        }
-
     }
 
     private void extraerdatosbotonacompañantes(java.awt.event.ActionEvent evt) {
 
-        int numeroNiños = Integer.parseInt(this.vistaRegistroAcompañantes.getEntradaNumNiños().getText());
-        int numeroAdultos = Integer.parseInt(this.vistaRegistroAcompañantes.getEntradaNnumAdultos().getText());
-        int numeroTotalAcompañantes = numeroNiños + numeroAdultos;
+        int numerNiños = Integer.parseInt(this.vistaRegistroAcompañantes.getSpinnerNinos().getValue().toString());
+        int numerAdultos = Integer.parseInt(this.vistaRegistroAcompañantes.getSpinnerAdultos().getValue().toString());
+        int totalAcompañantes = numerNiños + numerAdultos;
 
-        if (numeroNiños == 1) {
+        if (numerNiños == 0) {
+            int valorTotalNiños = 0;
+            this.vistaRegistroAcompañantes.getLabelvalorNiños().setText(Integer.toString(valorTotalNiños));
+
+        } else if (numerNiños == 1) {
             int valorTotalNiños = 35000;
             this.vistaRegistroAcompañantes.getLabelvalorNiños().setText(Integer.toString(valorTotalNiños));
 
-        } else if (numeroNiños == 2) {
+        } else if (numerNiños == 2) {
             int valorTotalNiños = 70000;
             this.vistaRegistroAcompañantes.getLabelvalorNiños().setText(Integer.toString(valorTotalNiños));
 
@@ -239,19 +234,19 @@ public class Controlador {
 
         }
 
-        if (numeroAdultos == 1) {
+        if (numerAdultos == 1) {
             int valorTotalAdultos = 40000;
             this.vistaRegistroAcompañantes.getLabelvalorAdultos().setText(Integer.toString(valorTotalAdultos));
 
-        } else if (numeroAdultos == 2) {
+        } else if (numerAdultos == 2) {
             int valorTotalAdultos = 80000;
             this.vistaRegistroAcompañantes.getLabelvalorAdultos().setText(Integer.toString(valorTotalAdultos));
 
-        } else if (numeroAdultos == 3) {
+        } else if (numerAdultos == 3) {
             int valorTotalAdultos = 120000;
             this.vistaRegistroAcompañantes.getLabelvalorAdultos().setText(Integer.toString(valorTotalAdultos));
 
-        } else if (numeroAdultos == 4) {
+        } else if (numerAdultos == 4) {
             int valorTotalAdultos = 160000;
             this.vistaRegistroAcompañantes.getLabelvalorAdultos().setText(Integer.toString(valorTotalAdultos));
 
@@ -260,21 +255,14 @@ public class Controlador {
             this.vistaRegistroAcompañantes.getLabelvalorAdultos().setText("");
             this.vistaRegistroAcompañantes.getLabelvalorTotalAcompañantes().setText("");
             this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().setText("");
-
         }
 
-        if (numeroNiños <= 2 && numeroAdultos <= 4) {
+        if (numerNiños <= 2 && numerAdultos <= 4) {
             JOptionPane.showMessageDialog(this.vistaRegistroAcompañantes, "Registrados correctamente!");
 
-
-        } else {
-
-            this.vistaRegistroAcompañantes.getEntradaNnumAdultos().setText("");
-            this.vistaRegistroAcompañantes.getEntradaNumNiños().setText("");
-            this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().setText("");
         }
 
-        this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().setText(Integer.toString(numeroTotalAcompañantes));
+        this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().setText(Integer.toString(totalAcompañantes));
 
         int valorTotalAcompañantes = (Integer.parseInt(this.vistaRegistroAcompañantes.getLabelvalorNiños().getText())) + Integer.parseInt(this.vistaRegistroAcompañantes.getLabelvalorAdultos().getText());
         this.vistaRegistroAcompañantes.getLabelvalorTotalAcompañantes().setText(Integer.toString(valorTotalAcompañantes));
@@ -282,17 +270,20 @@ public class Controlador {
 
     private void extrarDatosBotonEstadia(java.awt.event.ActionEvent evt) {
 
-        int ent_fechallegada = Integer.parseInt(this.vistaRegistroEstadia.getEntradaFechaLlegada().getText());
-        int ent_fechasalida = Integer.parseInt(this.vistaRegistroEstadia.getEntradaFechaSalida().getText());
+        Date fechaLlegada = this.vistaRegistroEstadia.getCalendarioLlegada().getDate();
+        Date fechaSalida = this.vistaRegistroEstadia.getCalendarioSalida().getDate();
 
-        int noches = ent_fechasalida - ent_fechallegada;
-        if (noches <= 0) {
-            JOptionPane.showMessageDialog(vistaRegistroEstadia, "Ingrese una fecha valida:");
+        long noches = fechaSalida.getTime() - fechaLlegada.getTime();
+        long calculo = TimeUnit.DAYS.convert(noches, TimeUnit.MILLISECONDS);
+
+        if (calculo <= 0) {
+            JOptionPane.showMessageDialog(vistaRegistroEstadia, "Entrada invalida!!!");
         } else {
-            this.vistaRegistroEstadia.getLabelNumeroNoches().setText(Integer.toString(noches));
 
-            int valorTotalAcompañantes = noches * 60000;
-            this.vistaRegistroEstadia.getLabelCostoTotalNoches().setText(Integer.toString(valorTotalAcompañantes));
+            this.vistaRegistroEstadia.getLabelNumeroNoches().setText(Long.toString(calculo));
+
+            long valorTotalAcompañantes = calculo * 60000;
+            this.vistaRegistroEstadia.getLabelCostoTotalNoches().setText(Long.toString(valorTotalAcompañantes));
             JOptionPane.showMessageDialog(vistaRegistroEstadia, "Noches registradas correctamente!");
         }
 
@@ -376,8 +367,8 @@ public class Controlador {
         int costoTotalComida = 0;
 
         int numeroNoches = Integer.parseInt(this.vistaRegistroEstadia.getLabelNumeroNoches().getText());
-        int numeroAdultos = Integer.parseInt(this.vistaRegistroAcompañantes.getEntradaNnumAdultos().getText());
-        int numeroNiños = Integer.parseInt(this.vistaRegistroAcompañantes.getEntradaNumNiños().getText());
+        int numeroAdultos = Integer.parseInt(this.vistaRegistroAcompañantes.getSpinnerNinos().getValue().toString());
+        int numeroNiños = Integer.parseInt(this.vistaRegistroAcompañantes.getSpinnerAdultos().getValue().toString());
 
         this.vistaRegistroComidas.getLabelNochesComida().setText(Integer.toString(numeroNoches));
         this.vistaRegistroComidas.getLabelAcompañantesComida().setText((this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().getText()));
@@ -431,42 +422,19 @@ public class Controlador {
         int totalServiciosAdicionales = costoGimansio + costoSpa + costoPiscina;
         this.vistaRegistroServiciosAdicionales.getLabelCostoTotalAdicionales().setText(Integer.toString(totalServiciosAdicionales));
 
+    }   
+
+    public void ActualizarTabla(java.awt.event.ActionEvent evt) {
+
+        ConsultasReservas consulta = new ConsultasReservas();
+        consulta.mostrarDatosTabla(this.mivista);
     }
 
-    /*private int gimansioSeleccionado(vistaPrincipal vista, Gimnasio objetoGimansio) {
-        int costoGimansio;
-        if (vista.getCheckboxGimnasio().isSelected()) {
-            costoGimansio = objetoGimansio.getCosto();
-        } else {
-            costoGimansio = 0;
-        }
-        return costoGimansio;
-    }
-
-    private int spaSeleccionado(vistaPrincipal vista, Spa objetoSpa) {
-        int costoSpa;
-        if (vista.getCheckboxSpa().isSelected()) {
-            costoSpa = objetoSpa.getCosto();
-        } else {
-            costoSpa = 0;
-        }
-        return costoSpa;
-    }
-
-    private int piscinaSeleccionado(vistaPrincipal vista, Piscina objetoPiscina) {
-        int costoPisicina;
-        if (vista.getCheckboxPiscina().isSelected()) {
-            costoPisicina = objetoPiscina.getCosto();
-        } else {
-            costoPisicina = 0;
-        }
-        return costoPisicina;
-    }*/
     private void hacerReserva(java.awt.event.ActionEvent evt) {
 
         String nombre = this.vistaRegistroInicial.getEntradaNombre().getText();
         String apellido = this.vistaRegistroInicial.getEntradaApellido().getText();
-        int cedula = Integer.parseInt(this.vistaRegistroInicial.getEntradaCedula().getText());
+        long cedula = Long.parseLong(this.vistaRegistroInicial.getEntradaCedula().getText());
         int acompañantes = Integer.parseInt(this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().getText());
         int noches = Integer.parseInt(this.vistaRegistroEstadia.getLabelNumeroNoches().getText());
         String habitacion = this.vistaRegistroHabitacion.getComboboxHabitacion().getSelectedItem().toString();
@@ -481,24 +449,11 @@ public class Controlador {
         Reserva objetoReserva = new Reserva(nombre, apellido, cedula, acompañantes, noches, habitacion, comida);
         objetoReserva.definirCosto(costoAcompañantes, costoHabitacion, costoComida, costoNoches, costoAdicionales);
 
-        this.miListaReserva.agregarReserva(objetoReserva);
-        DefaultTableModel mapeo2 = (DefaultTableModel) this.mivista.getTablaReserva().getModel();
+        ConsultasReservas consulta = new ConsultasReservas();
+        consulta.registrarDatosReserva(objetoReserva);
 
-        limpiarTabla(mapeo2);
-
-        for (Reserva elemento : this.miListaReserva.getLista()) {
-            mapeo2.addRow(new Object[]{elemento.getNombre(), elemento.getApellido(), elemento.getCedula(), elemento.getAcompañantes(), elemento.getNoches(), elemento.getHabitacion(), elemento.getComida(), elemento.getCostoTotal()});
-            System.out.println(elemento.getNombre());
-        }
         limpiarFormulario();
         JOptionPane.showMessageDialog(mivista, "Datos registrados Correctamente!");
-
-        this.vistaRegistroInicial.getEntradaNombre().setEditable(true);
-        this.vistaRegistroInicial.getEntradaApellido().setEditable(true);
-        this.vistaRegistroInicial.getEntradaCedula().setEditable(true);
-        this.vistaRegistroInicial.getEntradaCorreo().setEditable(true);
-        this.vistaRegistroInicial.getEntradaCelular().setEditable(true);
-        this.vistaRegistroInicial.getEntradaDireccion().setEditable(true);
     }
 
     private void limpiarFormulario() {
@@ -508,15 +463,11 @@ public class Controlador {
         this.vistaRegistroInicial.getEntradaCorreo().setText("");
         this.vistaRegistroInicial.getEntradaCelular().setText("");
         this.vistaRegistroInicial.getEntradaDireccion().setText("");
-        this.vistaRegistroAcompañantes.getEntradaNumNiños().setText("");
-        this.vistaRegistroAcompañantes.getEntradaNnumAdultos().setText("");
         this.vistaRegistroAcompañantes.getLabelvalorNiños().setText("");
         this.vistaRegistroAcompañantes.getLabelvalorAdultos().setText("");
         this.vistaRegistroAcompañantes.getLabelvalorTotalAcompañantes().setText("");
         this.vistaRegistroAcompañantes.getLabelTotalAcompañantes().setText("");
         this.vistaRegistroServiciosAdicionales.getLabelCostoTotalAdicionales().setText("");
-        this.vistaRegistroEstadia.getEntradaFechaLlegada().setText("");
-        this.vistaRegistroEstadia.getEntradaFechaSalida().setText("");
         this.vistaRegistroEstadia.getLabelNumeroNoches().setText("");
         this.vistaRegistroEstadia.getLabelCostoTotalNoches().setText("");
         this.vistaRegistroComidas.getComboBoxComida().setSelectedItem(("Selecciona"));

@@ -49,7 +49,7 @@ public class vistaRegistroHabitacion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel5.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel5.setBackground(new java.awt.Color(227, 242, 193));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Habitación", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jLabel24.setText("Tipo:");
